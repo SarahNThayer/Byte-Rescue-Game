@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Byte Rescue</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: monospace;
+      overflow: hidden;
+    }
+    #game-container {
+      position: relative;
+      width: 800px;
+      height: 480px;
+    }
+    canvas {
+      display: block;
+      image-rendering: pixelated;
+      border: 2px solid #333;
+    }
+    #hud {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+      font-size: 16px;
+      pointer-events: none;
+      text-shadow: 2px 2px 0 #000;
+      z-index: 10;
+    }
+    #hud .lives { color: #ff4444; }
+    #hud .score { color: #ffdd44; }
+    #hud .level-name { color: #44ffaa; }
+    #hud .keys { color: #44aaff; }
+    #overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      z-index: 20;
+    }
+    #overlay.hidden { display: none; }
+    #overlay h1 {
+      font-size: 48px;
+      margin-bottom: 8px;
+      text-shadow: 3px 3px 0 #000;
+    }
+    #overlay h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #44ffaa;
+    }
+    #overlay p {
+      font-size: 14px;
+      margin: 4px 0;
+      color: #aaa;
+    }
+    #overlay .blink {
+      animation: blink 1s infinite;
+      margin-top: 24px;
+      font-size: 18px;
+      color: #ffdd44;
+    }
+    #restart-btn {
+      margin-top: 20px;
+      padding: 10px 24px;
+      font-family: monospace;
+      font-size: 16px;
+      background: #ff4444;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+    #restart-btn:hover { background: #ff6666; }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game" width="800" height="480"></canvas>
+    <div id="hud">
+      <span class="lives" id="hud-lives">LIVES: ♥♥♥</span>
+      <span class="level-name" id="hud-level">Help Desk Plains</span>
+      <span class="keys" id="hud-keys">KEYS: 0/0</span>
+      <span class="score" id="hud-score">SCORE: 0</span>
+      <button id="mute-btn" style="pointer-events:auto;background:none;border:none;font-size:18px;cursor:pointer;">🔊</button>
+    </div>
+    <div id="overlay">
+      <h1>BYTE RESCUE</h1>
+      <h2>Alex vs The Glitch King</h2>
+      <p>Arrow Keys / WASD — Move</p>
+      <p>Space — Jump</p>
+      <p>X — Shoot (with Firewall Upgrade)</p>
+      <p>Stomp enemies from above!</p>
+      <p class="blink">Press SPACE or ENTER to Start</p>
+      <button id="restart-btn">RESTART</button>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
