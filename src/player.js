@@ -6,7 +6,7 @@ const FRICTION = 0.82;
 
 export function createPlayer(x, y, character) {
   return {
-    x, y, w: 20, h: character === 'mark' ? 30 : 26,
+    x, y, w: 20, h: character === 'mark' ? 26 : 30,
     vx: 0, vy: 0,
     grounded: false,
     hittingCeiling: false,
@@ -77,7 +77,7 @@ export function drawPlayer(ctx, player, camX, camY) {
 
   const bodyH = isMark ? 16 : 12;
   const legY = y + bodyH + 4;
-  const totalH = isMark ? 30 : 26;
+  const totalH = isMark ? 35 : 35;
 
   if (isMark) {
     ctx.fillStyle = '#222';

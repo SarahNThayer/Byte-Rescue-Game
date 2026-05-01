@@ -35,7 +35,8 @@ export function createGame(input) {
 
   function initLevel(num) {
     state.levelData = getLevelData(num);
-    const charH = state.selectedChar === 'mark' ? 30 : 26;
+    // const charH = state.selectedChar === 'mark' ? 30 : 26;
+    const charH = 35;
     state.player = createPlayer(state.levelData.playerSpawn.x, state.levelData.playerSpawn.y + 28 - charH, state.selectedChar);
     state.camera = createCamera(800, 480);
     state.projectiles = [];
@@ -52,7 +53,7 @@ export function createGame(input) {
       }));
     }
     const ld = state.levelData;
-    state.van = { x: -100, y: ld.playerSpawn.y - 40, phase: 0, timer: 0 };
+    state.van = { x: -100, y: ld.playerSpawn.y - 20, phase: 0, timer: 0 };
     state.introPhase = 0;
     state.introTimer = 0;
   }
@@ -90,11 +91,11 @@ export function createGame(input) {
       van.timer++;
       if (van.timer > 20) {
         p.x = ld.playerSpawn.x;
-        p.y = ld.playerSpawn.y + 28 - (p.character === 'mark' ? 30 : 26);
+        p.y = ld.playerSpawn.y + 28 - 35;
         van.phase = 3;
       }
     } else if (van.phase === 3) {
-      van.x += 4;
+      van.x += 8;
       if (van.x > 900) {
         state.current = STATES.PLAYING;
       }
@@ -335,7 +336,8 @@ export function createGame(input) {
         return;
       }
       p.x = ld.playerSpawn.x;
-      p.y = ld.playerSpawn.y;
+      // p.y = ld.playerSpawn.y;
+      p.y = ld.playerSpawn.y +23 - p.h;
       p.vx = 0;
       p.vy = 0;
       p.invincible = 60;
