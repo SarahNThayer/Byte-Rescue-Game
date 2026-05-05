@@ -1,4 +1,4 @@
-# Byte Rescue 🕹️
+# Byte Rescue
 
 8-bit IT-themed app built with JavaScript, HTML Canvas, and CSS. <br>
 Play as Steve or Mark, two IT workers rescuing a client system from **The Glitch King**.
