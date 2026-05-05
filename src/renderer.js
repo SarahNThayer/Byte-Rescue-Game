@@ -1,3 +1,8 @@
+//const logoImg = new Image();
+//logoImg.src = './assets/ITHawaii8bitc.png'; // Path to your local jpeg
+export const logoImg = new Image();
+logoImg.src = './assets/ITHawaii8bitc.png'; // Make sure the path matches your folder structure
+
 export function drawBackground(ctx, level, camX) {
   const grad = ctx.createLinearGradient(0, 0, 0, 480);
   grad.addColorStop(0, level.bgColor1);
@@ -126,7 +131,7 @@ export function showOverlay(title, subtitle, showRestart, showBlink, blinkText) 
   const overlay = document.getElementById('overlay');
   overlay.classList.remove('hidden');
   overlay.querySelector('h1').textContent = title;
-  overlay.querySelector('h2').textContent = subtitle || '';
+  overlay.querySelector('h2').textContent = subtitle || ''; // add an or src="assets/ITHawaii8bitc.png" id="logo-source"
 
   const btn = document.getElementById('restart-btn');
   btn.style.display = showRestart ? 'block' : 'none';
@@ -183,7 +188,70 @@ export function drawTitleScreen(ctx, time) {
     ctx.fillText('Press SPACE or ENTER to Start', 400, 380);
   }
   ctx.textAlign = 'left';
+
+ 
+  ctx.fillStyle = '#0a0a1a';
+  ctx.fillRect(0, 0, 800, 480);
+
+  if (logoImg.complete) {
+    const targetWidth = 300; // Choose how wide you want the logo
+    const aspectRatio = 4096 / 1188;
+    const targetHeight = targetWidth / aspectRatio;
+    
+    ctx.save();
+    ctx.imageSmoothingEnabled = false; // Keeps it 8-bit/crisp
+    
+    // Draw centered horizontally (400 - half width) 
+    // and placed above the "BYTE RESCUE" text (Y = 20)
+    ctx.globalAlpha = 1.0; // still bleeds because image is transparent
+    ctx.drawImage(
+      logoImg, 
+      400 - (targetWidth / 2), 20, 
+      targetWidth, targetHeight
+    );
+    ctx.restore();
+  }
 }
+
+// export function drawTitleScreen(ctx, time) {
+//   // 1. Draw Background & Stars FIRST
+//   ctx.fillStyle = '#0a0a1a';
+//   ctx.fillRect(0, 0, 800, 480);
+
+//   for (let i = 0; i < 50; i++) {
+//     const sx = (i * 97 + time * 0.1) % 800;
+//     const sy = (i * 53) % 480;
+//     ctx.fillStyle = `rgba(255,255,255,${0.1 + (Math.sin(time * 0.01 + i) * 0.1)})`;
+//     ctx.fillRect(sx, sy, 2, 2);
+//   }
+
+//   // 2. Draw all your text...
+//   ctx.fillStyle = '#44ffaa';
+//   ctx.font = 'bold 48px monospace';
+//   ctx.textAlign = 'center';
+//   ctx.fillText('BYTE RESCUE', 400, 140);
+//   // ... (rest of your text calls)
+
+//   // 3. Draw the Logo LAST so it sits on top of everything
+//   if (logoImg.complete) {
+//     const targetWidth = 300;
+//     const aspectRatio = 4096 / 1188;
+//     const targetHeight = targetWidth / aspectRatio;
+    
+//     ctx.save(); 
+//     // This ensures no transparency from other parts of the game leaks in
+//     ctx.globalAlpha = 1.0; 
+//     ctx.imageSmoothingEnabled = false;
+//     ctx.drawImage(
+//       logoImg, 
+//       400 - (targetWidth / 2), 20, 
+//       targetWidth, targetHeight
+//     );
+//     ctx.restore(); 
+//   }
+
+//   ctx.textAlign = 'left';
+// }
 
 export function drawCharSelect(ctx, time) {
   ctx.fillStyle = '#0a0a1a';

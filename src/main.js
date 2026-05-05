@@ -25,5 +25,5 @@ function gameLoop() {
   updatePrevKeys();
   requestAnimationFrame(gameLoop);
 }
-
+// console.log("main()");
 gameLoop();

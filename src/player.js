@@ -1,12 +1,12 @@
 const GRAVITY = 0.6;
 const MAX_FALL = 12;
-const MOVE_SPEED = 5;
+const MOVE_SPEED = 7;
 const JUMP_FORCE = -12;
-const FRICTION = 0.82;
+const FRICTION = 0.75;
 
 export function createPlayer(x, y, character) {
   return {
-    x, y, w: 20, h: character === 'mark' ? 26 : 30,
+    x, y, w: 20, h: character === 'mark' ? 35 : 35,
     vx: 0, vy: 0,
     grounded: false,
     hittingCeiling: false,
@@ -77,7 +77,8 @@ export function drawPlayer(ctx, player, camX, camY) {
 
   const bodyH = isMark ? 16 : 12;
   const legY = y + bodyH + 4;
-  const totalH = isMark ? 35 : 35;
+  // const totalH = isMark ? 30 : 26;
+    const totalH = isMark ? 35 : 35;
 
   if (isMark) {
     ctx.fillStyle = '#222';

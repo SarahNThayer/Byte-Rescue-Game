@@ -13,7 +13,7 @@ const STATES = { TITLE: 'title', CHAR_SELECT: 'char_select', INTRO: 'intro', PLA
 export function createGame(input) {
   const state = {
     current: STATES.TITLE,
-    level: 1,
+    level: 1, // start on level
     maxLevel: 3,
     player: null,
     camera: null,
@@ -34,10 +34,14 @@ export function createGame(input) {
   };
 
   function initLevel(num) {
+    console.log("Game started");
+
     state.levelData = getLevelData(num);
     // const charH = state.selectedChar === 'mark' ? 30 : 26;
-    const charH = 35;
-    state.player = createPlayer(state.levelData.playerSpawn.x, state.levelData.playerSpawn.y + 28 - charH, state.selectedChar);
+    //const charH = state.selectedChar === 'mark' ? 35 : 35;
+    const charH = 35; // Update this to match your new player.js value
+    // state.player = createPlayer(state.levelData.playerSpawn.x, state.levelData.playerSpawn.y + 28 - charH, state.selectedChar);
+     state.player = createPlayer(state.levelData.playerSpawn.x, state.levelData.playerSpawn.y + 23 - charH, state.selectedChar);
     state.camera = createCamera(800, 480);
     state.projectiles = [];
     state.keysCollected = 0;
@@ -53,6 +57,7 @@ export function createGame(input) {
       }));
     }
     const ld = state.levelData;
+    // state.van = { x: -100, y: ld.playerSpawn.y - 40, phase: 0, timer: 0 };
     state.van = { x: -100, y: ld.playerSpawn.y - 20, phase: 0, timer: 0 };
     state.introPhase = 0;
     state.introTimer = 0;
@@ -91,7 +96,8 @@ export function createGame(input) {
       van.timer++;
       if (van.timer > 20) {
         p.x = ld.playerSpawn.x;
-        p.y = ld.playerSpawn.y + 28 - 35;
+        // p.y = ld.playerSpawn.y + 28 - (p.character === 'mark' ? 30 : 26);
+        p.y = ld.playerSpawn.y + 28 - 35 //(p.character === 'mark' ? 35 : 35);
         van.phase = 3;
       }
     } else if (van.phase === 3) {
@@ -122,7 +128,8 @@ export function createGame(input) {
     const p = state.player;
     const cam = state.camera;
 
-    const spawnX = cam.x + Math.random() * cam.width;
+    // const spawnX = cam.x + Math.random() * cam.width;
+    const spawnX = cam.x + cam.width;
     if (Math.abs(spawnX - p.x) < 150) return;
 
     const types = ['spider', 'malware', 'spambot', 'ransomware'];
@@ -177,7 +184,8 @@ export function createGame(input) {
       }
 
       player.lives--;
-      player.invincible = 90;
+      // player.invincible = 90;
+      player.invincible = 60
       playSound('hurt');
       if (player.lives <= 0) {
         state.current = STATES.GAME_OVER;
@@ -283,7 +291,8 @@ export function createGame(input) {
           state.current = STATES.VICTORY;
           stopBGM();
           showOverlay('YOU WIN!', 'The System is Saved!', false, true);
-        } else {
+        } 
+        else {
           startLevelIntro();
         }
       }
@@ -335,18 +344,24 @@ export function createGame(input) {
         showOverlay('GAME OVER', 'The Glitch King Wins', true, false);
         return;
       }
-      p.x = ld.playerSpawn.x;
+      // p.x = ld.playerSpawn.x;
       // p.y = ld.playerSpawn.y;
-      p.y = ld.playerSpawn.y +23 - p.h;
+      // --- CHANGE THE LINES BELOW ---
+      p.x = ld.playerSpawn.x;
+      // Subtracting p.h (35) ensures the feet are on the ground, not in it.
+      p.y = ld.playerSpawn.y + 23 - p.h; 
+      // ------------------------------
       p.vx = 0;
       p.vy = 0;
-      p.invincible = 60;
+      // p.invincible = 60;
+      p.invincible = 5;
     }
 
     state.enemySpawnTimer++;
     if (state.enemySpawnTimer >= state.enemySpawnInterval) {
       state.enemySpawnTimer = 0;
-      spawnEnemy();
+      // TODO: add this back!
+      // spawnEnemy();
     }
 
     for (const enemy of ld.enemies) {
@@ -388,6 +403,18 @@ export function createGame(input) {
       state.current = STATES.LEVEL_COMPLETE;
       playSound('levelComplete');
       showOverlay('LEVEL ' + state.level + ' COMPLETE!', ld.name, false, true, 'Press ENTER for next level');
+      // IF LEVEL 3 DISAPLAY WIN TEXT
+      console.log("level: ", state.level);
+      console.log("maxLevel: ", state.maxLevel);
+
+
+      if (state.level === 3) {
+        //state.level > state.maxLevel
+        console.log("level: ", state.level);
+        console.log("maxLevel: ", state.maxLevel);
+        stopBGM();
+        showOverlay('YOU WIN!', 'The System is Saved!', false, true);
+      }       
     }
 
     updateCamera(state.camera, p, ld.width, ld.height);
@@ -409,7 +436,8 @@ export function createGame(input) {
 
     if (state.current === STATES.VICTORY) {
       drawVictoryScreen(ctx, state.player, state.time);
-      state.time++;
+      state.time++;      
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); //added
       return;
     }
 

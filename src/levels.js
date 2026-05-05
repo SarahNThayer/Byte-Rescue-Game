@@ -91,7 +91,7 @@ function level2() {
   const groundY = 420;
 
   const platforms = [
-    { x: 0, y: groundY, w: 400, h: 60 }, // starting
+    { x: 0, y: groundY, w: 400, h: 60 }, // starting 
     { x: 250, y: 350, w: 100, h: 16 }, // first one
     { x: 450, y: 280, w: 120, h: 16 },
     { x: 650, y: 220, w: 120, h: 16 },
@@ -119,7 +119,6 @@ function level2() {
     // { x: 3000, y: 140, w: 60, h: 80 },
     // { x: 3800, y: 150, w: 60, h: 70 },
   ];
-
 
   const movingPlatforms = [
     { x: 400, y: 320, w: 80, h: 16, startX: 400, endX: 580, speed: 1, moveY: false, axis: 'x' },
@@ -170,6 +169,7 @@ function level2() {
   return {
     name: 'Server Stack Towers',
     width: W, height: H,
+    // playerSpawn: { x: 50, y: groundY - 28 },
     playerSpawn: { x: 50, y: groundY - 28 },
     platforms: [...platforms, ...movingPlatforms],
     enemies, items, exitGate,
@@ -188,7 +188,6 @@ function level3() {
   const H = 480;
   const groundY = 420;
 
-  level 3 platforms:
   const platforms = [
     { x: 0, y: groundY, w: 350, h: 60 },
     { x: 250, y: 340, w: 80, h: 16 },
@@ -224,32 +223,32 @@ function level3() {
   ];
 
   const teleportNodes = [
-    { x: 300, y: groundY - 20, w: 20, h: 20, target: { x: 2100, y: 240 } },
-    { x: 2100, y: 240, w: 20, h: 20, target: { x: 3700, y: groundY - 20 } },
-    { x: 3700, y: groundY - 20, w: 20, h: 20, target: { x: 4600, y: 180 } },
+    // { x: 300, y: groundY - 20, w: 20, h: 20, target: { x: 2100, y: 240 } },
+    // { x: 2100, y: 240, w: 20, h: 20, target: { x: 3700, y: groundY - 20 } },
+    // { x: 3700, y: groundY - 20, w: 20, h: 20, target: { x: 4600, y: 180 } },
   ];
 
   const enemies = [
-    createSpider(400, groundY - 16),
-    createSpider(1100, groundY - 16),
-    createSpider(1900, groundY - 16),
-    createSpider(2700, groundY - 16),
-    createSpider(3500, groundY - 16),
-    createSpider(4300, groundY - 16),
-    createMalware(680, 204),
-    createMalware(1280, 264),
-    createMalware(2080, 264),
-    createMalware(2880, 264),
-    createMalware(3680, 264),
-    createMalware(4480, 264),
-    createSpamBot(900, groundY - 20),
-    createSpamBot(1700, groundY - 20),
-    createSpamBot(2500, groundY - 20),
-    createSpamBot(3300, groundY - 20),
-    createSpamBot(4100, groundY - 20),
-    createRansomwareBlock(1500, groundY - 28),
-    createRansomwareBlock(3100, groundY - 28),
-    createRansomwareBlock(4500, groundY - 28),
+    // createSpider(400, groundY - 16),
+    // createSpider(1100, groundY - 16),
+    // createSpider(1900, groundY - 16),
+    // createSpider(2700, groundY - 16),
+    // createSpider(3500, groundY - 16),
+    // createSpider(4300, groundY - 16),
+    // createMalware(680, 204),
+    // createMalware(1280, 264),
+    // createMalware(2080, 264),
+    // createMalware(2880, 264),
+    // createMalware(3680, 264),
+    // createMalware(4480, 264),
+    // createSpamBot(900, groundY - 20),
+    // createSpamBot(1700, groundY - 20),
+    // createSpamBot(2500, groundY - 20),
+    // createSpamBot(3300, groundY - 20),
+    // createSpamBot(4100, groundY - 20),
+    // createRansomwareBlock(1500, groundY - 28),
+    // createRansomwareBlock(3100, groundY - 28),
+    // createRansomwareBlock(4500, groundY - 28),
   ];
 
   const items = [
