@@ -4,7 +4,8 @@
 Play as Steve or Mark, two IT workers rescuing a client system from **The Glitch King**.
 
 <!-- ![Byte Rescue](./assets/ITHawaii8bitc.png) -->
-[![Byte-Rescue Demo]](https://youtu.be/Xhh-U3lTctg)
+[![ByteRescueDemo](https://img.youtube.com/vi/Xhh-U3lTctg/0.jpg)](https://www.youtube.com/watch?v=Xhh-U3lTctg)
+
 
 ## Features
 
